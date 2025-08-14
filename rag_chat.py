@@ -6,23 +6,30 @@ from langchain_core.prompts import PromptTemplate
 from openai import OpenAI
 import os
 import streamlit as st
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
 
 # Set up logging for debugging and monitoring.
 import logging
-logging.basicConfig(level=logging.INFO)
+log_level = os.getenv('LOG_LEVEL', 'INFO')
+logging.basicConfig(level=getattr(logging, log_level.upper()))
 
 st.set_page_config(page_title="Simple RAG Chat Bot", page_icon=":robot:", layout="wide")
 
-# Load the API key from the open_ai_key file
-with open('open_ai_key') as f:
-    os.environ['OPENAI_API_KEY'] = f.read().strip()
+# Get API key from environment variables
+openai_api_key = os.getenv('OPENAI_API_KEY')
+if not openai_api_key:
+    st.error("OPENAI_API_KEY not found. Please check your .env file or environment variables.")
+    st.stop()
 
 # Use the OpenAI client for the API
-client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+client = OpenAI(api_key=openai_api_key)
 
 # Create the vector database
 def create_vector_db(pdf_path, chunk_size=1000, chunk_overlap=100):
-    embedding_function = OpenAIEmbeddings(api_key=os.environ['OPENAI_API_KEY'])
+    embedding_function = OpenAIEmbeddings(api_key=openai_api_key)
     docs = PyPDFLoader(pdf_path)
     docs = docs.load_and_split(text_splitter=RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap))
     db = Chroma.from_documents(docs, embedding_function)
@@ -40,7 +47,8 @@ st.title("Simple RAG Chat Bot")
 st.subheader("Ask questions about the document and get answers from the RAG model.")
 
 # Example usage
-db = create_vector_db(pdf_path='pdfs/YOUR_PDF_FILE.pdf')  # Always recreate the db for this example
+pdf_path = os.getenv('PDF_PATH', 'pdfs/YOUR_PDF_FILE.pdf')
+db = create_vector_db(pdf_path=pdf_path)  # Always recreate the db for this example
 
 if prompt := st.chat_input("What is up?"):
     docs = db.similarity_search_with_relevance_scores(prompt, k=5)

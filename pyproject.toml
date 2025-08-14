@@ -1,0 +1,69 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "simple-rag"
+version = "0.1.0"
+description = "A simple implementation of a RAG (Retrieval-Augmented Generation) chat bot using OpenAI API, Langchain, and Streamlit"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+authors = [
+    {name = "CodeHalwell"}
+]
+keywords = ["rag", "chatbot", "openai", "langchain", "streamlit"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "streamlit>=1.33.0",
+    "openai>=1.23.0",
+    "langchain>=0.1.16",
+    "langchain-openai>=0.1.4",
+    "langchain-chroma>=0.1.0",
+    "langchain-core>=0.1.46",
+    "langchain-community>=0.0.34",
+    "langchain-text-splitters>=0.0.1",
+    "pypdf>=4.2.0",
+    "python-dotenv>=1.0.1",
+    "chromadb>=0.4.24",
+    "numpy>=1.26.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/CodeHalwell/simple_rag"
+Repository = "https://github.com/CodeHalwell/simple_rag"
+Issues = "https://github.com/CodeHalwell/simple_rag/issues"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "black>=23.0.0", 
+    "flake8>=6.0.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
