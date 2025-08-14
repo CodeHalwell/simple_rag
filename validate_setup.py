@@ -30,6 +30,8 @@ def test_imports():
         ('langchain_openai', 'langchain-openai'),
         ('langchain_chroma', 'langchain-chroma'),
         ('langchain_core', 'langchain-core'),
+        ('langchain_community', 'langchain-community'),
+        ('langchain_text_splitters', 'langchain-text-splitters'),
     ]
     
     missing_packages = []
