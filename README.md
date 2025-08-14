@@ -116,6 +116,31 @@ This includes tools like pytest, black, and flake8 for testing and code formatti
 
 If an error occurs while generating a response, the bot prints the error message and continues running. You can see the error messages in the terminal where you started the script.
 
+## Recent Updates
+
+### LangChain 0.3.x Upgrade (December 2024)
+
+The project has been updated to use the latest LangChain packages:
+
+- **LangChain**: Updated from 0.1.16 to 0.3.27 (latest stable)
+- **LangChain OpenAI**: Updated from 0.1.4 to 0.3.30
+- **LangChain Core**: Updated from 0.1.46 to 0.3.74
+- **LangChain Chroma**: Updated from 0.1.0 to 0.2.5
+- **LangChain Community**: Updated from 0.0.34 to 0.3.27
+- **LangChain Text Splitters**: Updated from 0.0.1 to 0.3.9
+- **OpenAI**: Updated to 1.99.0+
+
+**Breaking Changes Addressed:**
+- Import statements updated for LangChain 0.3.x compatibility
+- Document loaders now use `langchain_community`
+- Text splitters now use `langchain_text_splitters`
+- Prompt template usage simplified
+
+**OpenAI API Integration:**
+- Embeddings: Configured via `OpenAIEmbeddings` with API key
+- Chat: Configured via `OpenAI` client with streaming support
+- Model: Uses `gpt-3.5-turbo` for chat completions
+
 ## Migration from Previous Setup
 
 If you were previously using the `open_ai_key` file approach:
