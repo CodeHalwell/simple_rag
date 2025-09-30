@@ -38,8 +38,9 @@ def test_imports():
     
     for package, pip_name in required_packages:
         try:
-            __import__(package)
-            print(f"  ✓ {package}")
+            mod = __import__(package)
+            version = getattr(mod, '__version__', 'unknown')
+            print(f"  ✓ {package} ({version})")
         except ImportError:
             print(f"  ✗ {package} (install with: pip install {pip_name})")
             missing_packages.append(pip_name)
@@ -50,6 +51,18 @@ def test_imports():
         return False
     else:
         print("✅ All required packages are available!")
+        
+        # Check if LangChain 1.0 alpha is installed
+        try:
+            import langchain
+            if langchain.__version__.startswith('1.0.0a'):
+                print(f"✅ LangChain 1.0 alpha detected: {langchain.__version__}")
+            elif langchain.__version__.startswith('0.3'):
+                print(f"ℹ️  LangChain 0.3.x detected: {langchain.__version__}")
+                print("   Consider upgrading to 1.0.0a10 for latest features")
+        except:
+            pass
+        
         return True
 
 def test_env_file():
