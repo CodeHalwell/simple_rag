@@ -116,6 +116,39 @@ This includes tools like pytest, black, and flake8 for testing and code formatti
 
 If an error occurs while generating a response, the bot prints the error message and continues running. You can see the error messages in the terminal where you started the script.
 
+## Recent Updates
+
+### LangChain 1.0 Alpha Upgrade (December 2024)
+
+The project has been updated to use LangChain 1.0 alpha release:
+
+- **LangChain**: Updated to 1.0.0a10 (alpha release)
+- **LangChain Core**: Updated to 0.3.76+
+- **LangChain OpenAI**: Updated to 0.3.33+
+- **LangChain Community**: Updated to 0.3.30+
+- **LangChain Chroma**: Updated to 0.2.6+
+- **LangChain Text Splitters**: Updated to 0.3.11+
+- **OpenAI**: Updated to 1.99.0+
+
+**What's in LangChain 1.0 Alpha:**
+- LangChain 1.0 marks the first major version with a focus on stability and production readiness
+- Improved API consistency across all LangChain packages
+- Enhanced type safety and error handling
+- Better integration patterns with external APIs and services
+
+**Breaking Changes Addressed:**
+- Import statements updated for LangChain 1.0 compatibility
+- Document loaders now use `langchain_community`
+- Text splitters now use `langchain_text_splitters`
+- Prompt template usage simplified
+
+**OpenAI API Integration:**
+- Embeddings: Configured via `OpenAIEmbeddings` with API key
+- Chat: Configured via `OpenAI` client with streaming support
+- Model: Uses `gpt-3.5-turbo` for chat completions
+
+**Note:** LangChain 1.0 is currently in alpha release. The stable 1.0 release is expected soon. Use with caution in production environments.
+
 ## Migration from Previous Setup
 
 If you were previously using the `open_ai_key` file approach:

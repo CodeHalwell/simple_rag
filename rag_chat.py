@@ -1,5 +1,5 @@
-from langchain.document_loaders.pdf import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
 from langchain_core.prompts import PromptTemplate
@@ -38,8 +38,7 @@ def create_vector_db(pdf_path, chunk_size=1000, chunk_overlap=100):
 
 # Create a Prompt Template instance
 prompt_template = PromptTemplate.from_template(
-    "You are a document assistant. Help me understand the following content: {content}. Please provide me with page numbers for further reading",
-    template_format='f-string'
+    "You are a document assistant. Help me understand the following content: {content}. Please provide me with page numbers for further reading"
 )
 
 st.title("Simple RAG Chat Bot")
